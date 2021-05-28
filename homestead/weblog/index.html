@@ -1,0 +1,171 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="initial-scale=1"/>
+<title>WebLog Templ8 (Thomas R. Papp)</title>
+<link rel="icon" media="print" onload="javascript:this.media='all'" href="https://www.shareicon.net/data/128x128/2015/10/11/654237_edit_512x512.png"/>
+<link rel="stylesheet" media="print" onload="javascript:this.media='all'" href="https://fonts.googleapis.com/css?family=Lato%7CPlayfair+Display"/>
+<link rel="stylesheet" media="print" onload="javascript:this.media='all'" href="https://fonts.googleapis.com/css?family=Noto%20Serif"/>
+<link rel="stylesheet" media="print" onload="javascript:this.media='all'" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"/>
+<style>
+/*System and box model reset*/
+*{box-sizing:border-box;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}*:before,*:after{box-sizing:inherit}
+
+/*Document and skeleton reset*/
+html{line-height:1.15}body{margin:0}main, nav,header,footer,section,article,aside,details,figcaption,figure,hgroup,menu{display:block}
+
+/*Grouping and typography reset*/
+fieldset{padding:.35em .625em .75em}
+summary{display:list-item;cursor:pointer}
+hr{box-sizing:content-box;height:0;overflow:visible}
+legend{color:inherit;display:table;max-width:100%;padding:0;white-space:normal}
+
+b,strong{font-weight:bolder}small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-0.25em}sup{top:-0.5em}
+abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}
+code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}
+
+/*Content and miscellaneous reset*/
+embed,object,iframe{border:0}svg{overflow:hidden}progress{vertical-align:baseline}
+textarea,button,input,optgroup,select{font:inherit;margin:0}button,input{overflow:visible}button,select{text-transform:none}
+button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button}
+button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}
+button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}
+
+[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}
+[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}
+::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
+
+/*Markup styling*/
+small{font-size:90%}
+
+a{text-decoration:underline;color:inherit}a:hover{text-decoration:underline}@media all and (orientation:landscape){a{text-decoration:none}}
+
+input[type="radio"]{display:none}
+input[type="checkbox"]{display:none}
+input[type="text"]{font-style:italic}input[type="text"]:focus{font-style:normal}
+
+label{cursor:pointer}
+
+button{cursor:pointer;background:none;background-color:transparent;color:inherit;border:none;outline:none;padding:0.4em;font:inherit}
+button:hover{background:#3F3F41}
+
+/*Custom styling*/
+html{height:100%/*;font:16px / 1.5 "Playfair Display",system-ui,sans-serif*/}
+body{font-size:18px;line-height:1.3em;height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;background:#2D2D30;color:#F1F1F1}
+main{font-family:"Noto Serif",serif;word-wrap:break-word;background:#2D2D30}
+
+.dsp-flx{display:flex}.flx-00a{flex:0 0 auto}.flx-11a{flex:1 1 auto}.flx-dir-row-reverse{flex-direction:row-reverse}.flx-dir-column{flex-direction:column}.flx-dir-row{flex-direction:row}
+.ovrf-a{overflow:auto}.minh-0{min-height:0}.xform-x{transform:scaleX(-1)}.draggable{-webkit-app-region:drag}.h-100p{height:100%}.w-100p{width:100%}.pad-0{padding:0}.marg-0{margin:0}
+.align-i-center{align-items:center}.jstfy-contnts-center{justify-content:center}.jstfy-contnts-space-btwn{justify-content:space-between}
+.txt-align-center{text-align:center}.txt-align-ryt{text-align:right}.txt-xform-cap{text-transform:capitalize}.fnt-size-80p{font-size:80%}.fnt-size-200p{font-size:200%}
+.brdr-bot-1px-solid-ylw{border-bottom:1px solid #FFF200}.brdr-ryt-1px-solid-ylw{border-right:1px solid #FFF200}.brdr-top-1px-solid-ylw{border-top:1px solid #FFF200}
+.brdr-bot-1px-solid-wyt{border-bottom:1px solid #F1F1F1}.brdr-bot-1px-solid-wyt60p{border-bottom:1px solid #F1F1F160}.brdr-top-1px-solid-wyt60p{border-top:1px solid #F1F1F160}
+.brdr-ryt-1px-solid-wyt60p{border-right:1px solid #F1F1F160}.brdr-lft-1px-solid-wyt60p{border-left:1px solid #F1F1F160}
+.ylw{color:#FFF200}.red{color:#FD5A53}.no-transition{transition-property:none !important}
+
+#hdr0{font-family:"Playfair Display",serif}
+#hdr0 input[type="radio"]:checked + label{color:#FFF200}
+#hdr0 input[type="radio"]:hover + label{background:#3F3F41}
+#hdr0 label{padding:0.6em 3%;transition:all 0.3s}
+
+#nav1{background:#3F3F41;font-family:"Lato",serif;padding-top:0.5em;padding-bottom:0.2em;overflow-y:hidden}
+#nav1 input[type="radio"] + label{background:#2D2D30;padding:0 0.4em;margin:0 0.4em;transition:all 0.3s;border:1px solid #F1F1F160}
+#nav1 input[type="radio"]:hover + label{background:#FFF20060}
+#nav1 input[type="radio"]:not(checked) + label{color:#F1F1F1}
+#nav1 input[type="radio"]:checked + label{background:#FFF20060}
+
+#nav0{font-family:"Playfair Display",serif}
+#nav0 input[type="radio"] + label{padding:0.6em;transition:all 0.3s}
+#nav0 input[type="radio"]:checked + label{color:#FFF200}
+#nav0 input[type="radio"]:hover + label{background:#3F3F41}
+
+#ftr0{font-family:"Lato",serif;background:#3F3F41}
+#ftr0 button{transition:all 0.3s}
+#ftr0 button:hover{background:#FFF20060}
+
+@media all and (orientation:portrait){
+	#wrap0{flex-direction:column-reverse}
+	#nav0{flex-direction:row}
+	#nav0{border-top:1px solid #FFF200;border-right:none}
+}
+/*Print styling*/
+@media print{@page{size:portrait/*;margin:0;max-height:100%;max-width:100%*/}*{-webkit-print-color-adjust:exact}}
+</style></head>
+<body>
+	<div id="wrap0" class="minh-0 dsp-flx flx-11a ovrf-a">
+		<nav id="nav0" class="minh-0 dsp-flx flx-00a flx-dir-column ovrf-a brdr-ryt-1px-solid-ylw jstfy-contnts-space-btwn">
+			<input type="radio" name="btns" id="market" onclick="load('market')"/><label for="market" class="h-100p w-100p dsp-flx align-i-center jstfy-contnts-center"><i class="la la-shopping-cart la-2x"></i></label>
+			<input type="radio" name="btns" id="office" onclick="load('office')"/><label for="office" class="h-100p w-100p dsp-flx align-i-center jstfy-contnts-center"><i class="la la-feather-alt la-2x"></i></label>
+			<input type="radio" name="btns" id="atrium" onclick="load('atrium')" checked="checked"/><label for="atrium" class="h-100p w-100p dsp-flx align-i-center jstfy-contnts-center"><i class="la la-archway la-2x"></i></label>
+			<input type="radio" name="btns" id="studio" onclick="load('studio')"/><label for="studio" class="h-100p w-100p dsp-flx align-i-center jstfy-contnts-center"><i class="la la-palette la-2x"></i></label>
+			<input type="radio" name="btns" id="lounge" onclick="load('lounge')"/><label for="lounge" class="h-100p w-100p dsp-flx align-i-center jstfy-contnts-center"><i class="la la-couch la-2x"></i></label>
+		</nav>
+		<div class="minh-0 dsp-flx flx-11a flx-dir-column ovrf-a">
+			<header id="hdr0" class="minh-0 dsp-flx flx-00a ovrf-a brdr-bot-1px-solid-ylw align-i-center jstfy-contnts-center fnt-size-80p">
+				<input type="radio" name="btns" id="central" class="flx-00a" onclick="load('central')"/><label for="central"><i class="la la-dharmachakra la-2x"></i></label>
+				<span id="navTxt" class="flx-11a txt-align-center fnt-size-200p ylw txt-xform-cap brdr-lft-1px-solid-wyt60p brdr-ryt-1px-solid-wyt60p">Atrium</span>
+				<input type="radio" name="btns" id="search" class="flx-00a" onclick="load('search')"/><label for="search"><i class="la la-search la-2x xform-x"></i></label>
+			</header>
+			<nav id="nav1" class="minh-0 dsp-flx flx-00a ovrf-a brdr-bot-1px-solid-wyt60p">
+				<input type="radio" name="innerBtns" id="innerNavItem0"/><label for="innerNavItem0">_innerNavItem0_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem1"/><label for="innerNavItem1">_innerNavItem1_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem2"/><label for="innerNavItem2">_innerNavItem2_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem3"/><label for="innerNavItem3">_innerNavItem3_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem4"/><label for="innerNavItem4">_innerNavItem4_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem5"/><label for="innerNavItem5">_innerNavItem5_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem6"/><label for="innerNavItem6">_innerNavItem6_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem7"/><label for="innerNavItem7">_innerNavItem7_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem8"/><label for="innerNavItem8">_innerNavItem8_</label>
+				<input type="radio" name="innerBtns" id="innerNavItem9"/><label for="innerNavItem9">_innerNavItem9_</label>
+				<input type="radio" name="innerBtns" id="innerNavItemN"/><label for="innerNavItemN">_innerNavItemN_</label>
+			</nav>
+			<main id="main" class="minh-0 flx-11a ovrf-a" onscroll="/*hideOrShowOnScroll()*/">
+				ThisIsSomeReallyLongStringThatIsSupposedToTestTheLengthOfTheContent.~IfThisLineReachesTheEndOfThePageThenTheStringShouldBreakAndFlowIntoTheNextLine.~YouCanTestThisMoreExtensivelyByAdjustingTheWindowSizeAndNotingTheChanges.
+
+				<br/><br/>
+				This<br/>string<br/>is<br/>supposed<br/>to<br/>test<br/>the<br/>depth<br/>of<br/>the<br/>content<br/>when<br/>it<br/>reaches<br/>the<br/>
+				bottom<br/>most<br/>part<br/>of<br/>the<br/>page.<br/>~<br/>If<br/>this<br/>line<br/>reaches<br/>the<br/>end<br/>of<br/>the<br/>page,<br/>
+				then<br/>vertical<br/>scrolling<br/>should<br/>be<br/>possible.<br/>~<br/>You<br/>can<br/>test<br/>this<br/>more<br/>extensively<br/>
+				by<br/>adjusting<br/>the<br/>window<br/>size<br/>and<br/>noting<br/>the<br/>changes.
+			</main>
+			<footer id="ftr0" class="dsp-flx flx-00a ovrf-a brdr-top-1px-solid-wyt60p">
+				<button class="flx-00a align-i-center jstfy-contnts-center"><i class="la la-satellite-dish red"></i></button>
+				<button class="flx-00a align-i-center jstfy-contnts-center"><span id="clockbox"></span></button>
+				<span class="flx-11a align-i-center jstfy-contnts-center"></span>
+				<!--<div class="minh-0 flx-11a ovrf-a txt-align-ryt">TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTtestNOTIFtestBELLtestICONtestLOADINGtestTIMEtestICONtestOTHERtestITEMS</div>-->
+				<button class="flx-00a no-transition align-i-center jstfy-contnts-center" onmouseover="this.style='transform:scaleX(-1)'" onmouseout="this.style='transform:scaleX(1)'"><i class="la la-adjust"></i></button>
+				<button class="flx-00a align-i-center jstfy-contnts-center" onclick="javascript:/*toggleFullscreen*/var isApple=navigator.vendor.includes('Apple');if(isApple){if(!document.webkitFullscreenElement){document.documentElement.webkitRequestFullscreen()}else{document.webkitExitFullscreen()}}else{if(!document.fullscreenElement){document.documentElement.requestFullscreen()}else{document.exitFullscreen();location.reload()}}"><i class="la la-vector-square"></i></button>
+			</footer>
+		</div>
+	</div>
+<script>'use strict'
+/*\
+* getClock() - gets the current system time
+\*/
+var dayofweek=new Array('Su','Mo','Tu','We','Th','Fr','Sa');var monthinyear=new Array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');var date;var day;var month;var year;var hour;var minute;var second
+function getClock(){/*https://codepen.io/jasonleewilson/pen/gPrxwX*/
+	var today=new Date();date=today.getDate();day=today.getDay();month=today.getMonth();year=today.getFullYear();hour=today.getHours();minute=today.getMinutes();second=today.getSeconds()
+	if(date<=9){date="0"+date}/*if(hour===0){year=year+1900}*/if(hour<=9){hour="0"+hour}if(minute<=9){minute="0"+minute}
+	document.getElementById('clockbox').innerHTML=date+" "+monthinyear[month]+" "+year+", "+dayofweek[day]+" "+hour+":"+minute
+	setTimeout("getClock()",(60*1000)-(second*1000))/*60 times 1000ms, minus ((the seconds returned at the moment getSeconds was called)*1000ms) << this is the remaining seconds until next minute, recall function then*/
+}window.onload=getClock
+/*\
+* load(id) - loads the requested element by its id
+\*/
+var wss=new WebSocket('wss://'+window.location.host+'/wss/')
+function load(id){
+	document.getElementById('navTxt').innerHTML=id
+	document.getElementById('main').innerHTML=id+' data'
+	wss.send('User clicked: '+id)
+	wss.onmessage=function(event){console.log('WS event: ',event)}
+}
+/*\
+* hideOrShowOnScroll() - on scroll, hides or shows the elements in the function
+\*/
+var prevScrollPos=0
+function hideOrShowOnScroll(){
+	var currentScrollPos=document.getElementById('main').scrollTop
+	if(prevScrollPos>currentScrollPos){document.getElementById('ftr0').style.display='flex';document.getElementById('nav1').style.display='flex'}
+	else{document.getElementById('ftr0').style.display='none';document.getElementById('nav1').style.display='none'}
+	prevScrollPos=currentScrollPos
+}
+</script><!--<script async defer src=""></script>--></body></html>
