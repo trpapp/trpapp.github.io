@@ -1,7 +1,0 @@
-torch/tools/one-time-use-code-src
-torch/tools/prototype
-torch/tools/atlas
-
-project template in torch/tools/project AND torch/tools/jstempl8
-
-REDO hive9.net
