@@ -103,8 +103,8 @@
 	<script> //test
 		function saveResult(result) {console.log(result)}
 		//fetch('./', {mode:'cors', method:'HEAD'}).then(response => saveResult(response.headers.get('Date')))
-		fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);saveResult(response.statusText);response.headers}).then(result => saveResult(Object.fromEntries(result)))
-		fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`http://ip-api.com/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => saveResult(result))
+		fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);saveResult(response.statusText);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
+		//fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`http://ip-api.com/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => saveResult(result))
 		saveResult(performance.getEntries()[0].nextHopProtocol)
 	</script>
 </body>
