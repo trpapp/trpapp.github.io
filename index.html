@@ -102,7 +102,9 @@
 	</div>
 	<script> //test
 		function saveResult(result) {console.log(result)}
-		fetch(`./`, {mode:'cors', method:'HEAD'}).then(response => saveResult(response.headers.get('Date')))
+		//fetch('./', {mode:'cors', method:'HEAD'}).then(response => saveResult(response.headers.get('Date')))
+		saveResult(Object.fromEntries((async () => await fetch('./',{method:'HEAD'}))().headers.entries()))
+		saveResult(performance.getEntries()[0].nextHopProtocol)
 	</script>
 </body>
 
