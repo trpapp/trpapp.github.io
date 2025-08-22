@@ -51,7 +51,7 @@
 	<link
 		rel="stylesheet"
 		media="projection"
-		href="https://fonts.googleapis.com/css?family=Playfair+Display"
+		href="https://cdn.jsdelivr.net/npm/public-sans@latest/public-sans.min.css"
 	/>
 	<link
 		rel="stylesheet"
@@ -100,6 +100,10 @@
 			</div>
 		</div>
 	</div>
+	<script> //test
+		function saveResult(result) {console.log(result)}
+		fetch('./', {mode:'cors', method:'HEAD'}).then(response => saveResult(response.headers.get('Date')))
+	</script>
 </body>
 
 </html>
