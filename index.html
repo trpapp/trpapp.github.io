@@ -100,12 +100,13 @@
 			</div>
 		</div>
 	</div>
-	<script> //test
-		function saveResult(result) {console.log(result)}
-		//fetch('./', {mode:'cors', method:'HEAD'}).then(response => saveResult(response.headers.get('Date')))
-		fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);saveResult(response.statusText);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
-		//fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`http://ip-api.com/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => saveResult(result))
+	<script>
+		function saveResult(json) {console.log(json)}
+		/*works off of the origin server*/
 		saveResult(performance.getEntries()[0].nextHopProtocol)
+		fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
+		/*works independently/locally*/
+		//fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`http://ip-api.com/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => saveResult(result))
 	</script>
 </body>
 
