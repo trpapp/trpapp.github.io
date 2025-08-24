@@ -67,25 +67,39 @@
 	<script>
 		const localeLanguageRegion = "en-US"
 		const localeJurisdiction = "America/New_York"
-		console.log(localeLanguageRegion+" | "+localeJurisdiction)
+		console.log("Locale language region set to: "+localeLanguageRegion)
+		console.log("Locale jurisdiction set to: "+localeJurisdiction)
 
 		const establishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
-		console.log(establishedNetworkProtocol)
+		console.log("Network protocol set to: "+establishedNetworkProtocol)
 
-		let httpHeaderResponse
-		try {httpHeaderResponse =
-			(async () => await fetch('./', {mode:'cors', method:'HEAD'}).then(response => response).catch(() => null))().then(resolve)
-		} catch {httpHeaderResponse = null}
-		console.log(httpHeaderResponse.status)
-		console.log(Object.fromEntries(httpHeaderResponse.headers))
-
-		let clock
 		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
+		console.log("Localized clock initialized to: "+localizedClientClock)
 
-		const acceptableDrift = 120000 //in milliseconds
-		const tick = 4000 //in milliseconds
+		const httpHeaderResponse =
+		async () => {
+			try{const result =
+				await fetch('./', {mode:'cors', method:'HEAD'})
+					.then(response => {return response})
+					.catch(() => {return null})
+				return result
+			} catch {return null}
+		}
+
+		var x= "";
+		if(window.fetch)
+			fetch('./', {mode:'cors', method:'HEAD'})
+			.then(function(r) {
+			r.headers.forEach(
+				function(Value, Header) { x= x + Header + "\n" + Value + "\n\n"; }
+			);
+			});
+		else
+   		document.write("This does not work in your browser - no support for fetch API");
+
+		console.log(x)
 	</script>
-	<script src="./script.js" defer=""></script>
+	<script defer="" src="./script.js"></script>
 	<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
 </head>
 
