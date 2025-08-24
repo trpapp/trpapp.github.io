@@ -1,3 +1,5 @@
+let httpHeaderResponseHeaders = null
+
 /*swap in all link tag resources marked for projection*/
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('link[media=projection]').forEach(link=>{link.media='all'});})
 
@@ -5,9 +7,12 @@ document.addEventListener("DOMContentLoaded",function(){document.querySelectorAl
 //fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`http://ip-api.com/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => console.log(result))
 
 /*clock processing script*/
+const acceptableDrift = 120000 //in milliseconds
+const tick = 4000 //in milliseconds
+
 const serverClockLocalized =
-!(httpHeaderResponse === null)
-? new Date(new Date(httpHeaderResponse.headers.get('Date'))
+!(httpHeaderResponseHeaders === null)
+? new Date(new Date(httpHeaderResponseHeaders.get('Date'))
     .toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
 : null
 
@@ -22,7 +27,7 @@ document.addEventListener('visibilitychange', () => {if(document.visibilityState
 document.addEventListener('resume', () => updateClock())
 //https://developer.chrome.com/docs/web-platform/page-lifecycle-api/image/page-lifecycle-api-state.svg
 
-clock =
+let clock =
 useServerClock === true
 ? new Date(serverClockLocalized.getTime())
 : new Date(localizedClientClock.getTime())
@@ -39,5 +44,7 @@ function clockProc() {
     updateClock()
     if(document.getElementsByClassName('liveClockFull').length > 0)
         {for(item of document.getElementsByClassName('liveClockFull')){item.innerHTML=clock}}
+    if(document.getElementsByClassName('liveClockYear').length > 0)
+        {for(item of document.getElementsByClassName('liveClockYear')){item.innerHTML=clock.getFullYear()}}
     setTimeout(() => clockProc(), tick)
 }
