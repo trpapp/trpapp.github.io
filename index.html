@@ -52,17 +52,38 @@
 		rel="stylesheet"
 		media="projection"
 		href="https://cdn.jsdelivr.net/npm/public-sans@latest/public-sans.min.css"
-	/>
+	/> <!--default typeface-->
 	<link
 		rel="stylesheet"
 		media="projection"
 		href="https://cdn.jsdelivr.net/gh/icons8/line-awesome/dist/line-awesome/css/line-awesome.min.css"
-	/>
+	/> <!--default icons-->
 	<link
 		rel="stylesheet"
 		media="projection"
 		href="./style.css"
 	/>
+
+	<script>
+		const localeLanguageRegion = "en-US"
+		const localeJurisdiction = "America/New_York"
+		console.log(localeLanguageRegion+" | "+localeJurisdiction)
+
+		const establishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
+		console.log(establishedNetworkProtocol)
+
+		let httpHeaderResponse
+		try {httpHeaderResponse =
+			(async () => await fetch('./', {mode:'cors', method:'HEAD'}).then(response => response).catch(() => null))().then(resolve)
+		} catch {httpHeaderResponse = null}
+		console.log(httpHeaderResponse)
+
+		let clock
+		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
+
+		const acceptableDrift = 120000 //in milliseconds
+		const tick = 4000 //in milliseconds
+	</script>
 	<script src="./script.js" defer=""></script>
 	<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
 </head>
@@ -98,16 +119,10 @@
 			<div id="weblog_link">
 				<a href="https://trpapp.github.io/weblog/"><i class="las la-pencil-ruler la-lg grow"></i></a>
 			</div>
+
+			<div class="liveClockFull"></div>
 		</div>
 	</div>
-	<script>
-		function saveResult(json) {console.log(json)}
-		/*works off of the origin server*/
-		saveResult(performance.getEntries()[0].nextHopProtocol)
-		fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
-		/*works independently/locally*/
-		//fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`http://ip-api.com/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => saveResult(result))
-	</script>
 </body>
 
 </html>
