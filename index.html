@@ -76,7 +76,8 @@
 		try {httpHeaderResponse =
 			(async () => await fetch('./', {mode:'cors', method:'HEAD'}).then(response => response).catch(() => null))().then(resolve)
 		} catch {httpHeaderResponse = null}
-		console.log(httpHeaderResponse)
+		console.log(httpHeaderResponse.status)
+		console.log(Object.fromEntries(httpHeaderResponse.headers))
 
 		let clock
 		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
