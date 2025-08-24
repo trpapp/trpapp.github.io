@@ -88,14 +88,11 @@
 
 		var x= "";
 		if(window.fetch)
+		try{await
 			fetch('./', {mode:'cors', method:'HEAD'})
-			.then(function(r) {
-			r.headers.forEach(
-				function(Value, Header) { x= x + Header + "\n" + Value + "\n\n"; }
-			);
-			});
-		else
-   		document.write("This does not work in your browser - no support for fetch API");
+			.then(response => {response.headers.forEach(function(Value, Header){x=x + Header + "\n" + Value + "\n\n";})})
+			.catch(x="FETCH CHAIN ERROR")
+		}catch{x="AWAIT FETCH ERROR"}
 
 		console.log(x)
 	</script>
