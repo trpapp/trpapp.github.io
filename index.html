@@ -100,11 +100,19 @@
 		var xhr=new XMLHttpRequest()
 		function saveResult(json) {console.log(json);y=json}
 		if(window.fetch) {
-			fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
+			try{
+			fetch('./', {mode:'cors', method:'HEAD'})
+				.then(response =>{saveResult(response.status);return response.headers})
+				.then(result => saveResult(Object.fromEntries(result)))
+				.catch(() => {y = null})
+			}catch{y = null}
 		} else {
+			try{
 			xhr.open("HEAD", './', false)
+			xhr.onerror = function () => {y = null}
 			xhr.send()
 			y = xhr.getAllResponseHeaders()
+			}catch{y = null}
 		}
 		if(y === ""){y = null}
 		console.log("headers here: "+y)
