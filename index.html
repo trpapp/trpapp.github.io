@@ -96,8 +96,17 @@
 
 		console.log(x)
 
+		var y=""
+		var xhr=new XMLHttpRequest()
 		function saveResult(json) {console.log(json)}
-		fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
+		if(!window.fetch) {
+			fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
+		} else {
+			xhr.open("HEAD", location)
+			xhr.send()
+			y = xhr.getAllResponseHeaders()
+		}
+		console.log("y: "+y)
 	</script>
 	<script defer="" src="./script.js"></script>
 	<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
