@@ -75,7 +75,7 @@
 
 		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
 		console.log("Localized clock initialized to: "+localizedClientClock)
-
+/*
 		const httpHeaderResponse =
 		async () => {
 			try{const result =
@@ -95,26 +95,19 @@
 		}catch{x="AWAIT FETCH ERROR"}
 
 		console.log(x)
-
+*/
 		var y=""
 		var xhr=new XMLHttpRequest()
-		function saveResult(json) {console.log(json)}
-		if(!window.fetch) {
+		function saveResult(json) {console.log(json);y=json}
+		if(window.fetch) {
 			fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
 		} else {
 			xhr.open("HEAD", './', false)
 			xhr.send()
 			y = xhr.getAllResponseHeaders()
-			//y = xhr.getAllResponseHeaders()
-			/*
-			xhr.onreadystatechange = () => {
-  				if (xhr.readyState === xhr.HEADERS_RECEIVED) {
-					y = xhr.getAllResponseHeaders()
-				} else {y="no hdrs"}
-			}
-   			*/
 		}
-		console.log("y: "+y)
+		if(y === ""){y = null}
+		console.log("headers here: "+y)
 	</script>
 	<script defer="" src="./script.js"></script>
 	<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
