@@ -4,7 +4,7 @@ let httpHeaderResponseHeaders = null
 document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('link[media=projection]').forEach(link=>{link.media='all'});})
 
 /*get ip and tracking info*/
-fetch('https://api.ipify.org/', {mode:'cors', method:'GET'}).then(response => response.text()).then(result => {return fetch(`https://free.freeipapi.com/api/json/${result}`, {mode:'cors', method:'GET'})}).then(response => response.json()).then(result => console.log(result))
+fetch('https://free.freeipapi.com/api/json/', {mode:'cors', method:'GET'}).then(response => response.json()).then(result => console.log(result))
 
 /*clock processing script*/
 const acceptableDrift = 120000 //in milliseconds
