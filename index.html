@@ -102,9 +102,13 @@
 		if(!window.fetch) {
 			fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
 		} else {
-			xhr.open("HEAD", location)
+			xhr.open("HEAD", './', false)
 			xhr.send()
-			y = xhr.getAllResponseHeaders()
+			//y = xhr.getAllResponseHeaders()
+			xhr.onreadystatechange = () => {
+  				if (xhr.readyState === xhr.HEADERS_RECEIVED) {
+					y = xhr.getAllResponseHeaders()
+				} else {y="no hdrs"}
 		}
 		console.log("y: "+y)
 	</script>
