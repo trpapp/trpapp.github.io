@@ -103,11 +103,9 @@
 			fetch('./', {mode:'cors', method:'HEAD'}).then(response =>{saveResult(response.status);return response.headers}).then(result => saveResult(Object.fromEntries(result)))
 		} else {
 			console.log("got here")
-			xhr.open("HEAD", './', false)
+			xhr.open("HEAD", location, false)
 			xhr.send()
-			xhr.onload= function() {
-			   y = xhr.getAllResponseHeaders()
-			}
+			y = xhr.getAllResponseHeaders()
 			//y = xhr.getAllResponseHeaders()
 			/*
 			xhr.onreadystatechange = () => {
