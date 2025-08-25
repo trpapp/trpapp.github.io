@@ -109,7 +109,7 @@
 		} else {
 			try{
 			xhr.open("HEAD", './', false)
-			xhr.onerror = function () => {y = null}
+			xhr.onerror = function() {y = null}
 			xhr.send()
 			y = xhr.getAllResponseHeaders()
 			}catch{y = null}
