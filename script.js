@@ -1,8 +1,8 @@
 let httpHeaders = null
 if(!(result === null)) console.log("result IS NOT NULL!")
 
-/*swap in all link tag resources marked for print*/
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('link[media=print]').forEach(link=>{link.media='all'});})
+/*swap in all link tag resources marked for projection*/
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('link[media=projection]').forEach(link=>{link.media='all'});})
 
 /*get ip and tracking info*/
 fetch('https://free.freeipapi.com/api/json/', {mode:'cors', method:'GET'}).then(response => response.json()).then(result => console.log(result))
