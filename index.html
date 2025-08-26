@@ -83,7 +83,7 @@
 			fetch('./', {mode:'cors', method:'HEAD'})
 			.then(response => {
 				logResult("Http request method: Fetch -\n" + response.status)
-				logResult("Http request method: Fetch -\n" + JSON.stringigy(Object.fromEntries(response.headers)))
+				logResult("Http request method: Fetch -\n" + JSON.stringify(Object.fromEntries(response.headers)))
 			})
 			.catch(() => {
 				try {
