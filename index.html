@@ -75,47 +75,32 @@
 
 		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
 		console.log("Localized clock initialized to: "+localizedClientClock)
-/*
-		const httpHeaderResponse =
-		async () => {
-			try{const result =
-				await fetch('./', {mode:'cors', method:'HEAD'})
-					.then(response => {return response})
-					.catch(() => {return null})
-				return result
-			} catch {return null}
-		}
 
-		var x= "";
-		if(window.fetch)
-		try{await
-			fetch('./', {mode:'cors', method:'HEAD'})
-			.then(response => {response.headers.forEach(function(Value, Header){x=x + Header + "\n" + Value + "\n\n";})})
-			.catch(x="FETCH CHAIN ERROR")
-		}catch{x="AWAIT FETCH ERROR"}
-
-		console.log(x)
-*/
-		var y=""
-		var xhr=new XMLHttpRequest()
-		function saveResult(json) {console.log(json);y=json}
+		let result = null
+		const xhr = new XMLHttpRequest()
+		function logResult(txt) {result = txt; console.log(txt)}
 		if(window.fetch) {
-			try{
 			fetch('./', {mode:'cors', method:'HEAD'})
-				.then(response =>{saveResult(response.status);return response.headers})
-				.then(result => saveResult(Object.fromEntries(result)))
-				.catch(() => {y = null})
-			}catch{y = null}
+			.then(response => {
+				logResult("Http request method: Fetch -\n" + response.status)
+				logResult("Http request method: Fetch -\n" + Object.fromEntries(response.headers))
+			})
+			.catch(() => {
+				try {
+					xhr.open('HEAD', './', false)
+					xhr.onerror = () => {logResult("An xhr error occurred")}
+					xhr.send()
+					logResult("Http request method: Switched from Fetch to Xhr -\n" + xhr.getAllResponseHeaders())
+				} catch {logResult(null)}
+			})
 		} else {
-			try{
-			xhr.open("HEAD", './', false)
-			xhr.onerror = function() {y = null}
-			xhr.send()
-			y = xhr.getAllResponseHeaders()
-			}catch{y = null}
+			try {
+				xhr.open("HEAD", './', false)
+				xhr.onerror = () => {logResult("An xhr error occurred")}
+				xhr.send()
+				logResult("Http request method: Xhr -\n" + xhr.getAllResponseHeaders())
+			} catch {logResult(null)}
 		}
-		if(y === ""){y = null}
-		console.log("headers here: "+y)
 	</script>
 	<script defer="" src="./script.js"></script>
 	<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
