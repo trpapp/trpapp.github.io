@@ -2,7 +2,7 @@ let httpHeaders = null
 if(!(result === null)) console.log("result IS NOT NULL!")
 
 /*swap in all link tag resources marked for projection*/
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('link[media=projection]').forEach(link=>{link.media='all'});})
+document.addEventListener("DOMContentLoaded", function() {document.querySelectorAll('link[media=projection]').forEach(link => {link.media='all'})})
 
 /*get ip and tracking info*/
 fetch('https://free.freeipapi.com/api/json/', {mode:'cors', method:'GET'}).then(response => response.json()).then(result => console.log(result))
@@ -14,7 +14,7 @@ const tick = 4000 //in milliseconds
 const serverClockLocalized =
 !(httpHeaders === null)
 ? new Date(new Date(httpHeaders.get('Date'))
-    .toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
+    .toLocaleString(localeLanguageRegion, {timeZone:localeJurisdiction}))
 : null
 
 const useServerClock =
@@ -24,7 +24,7 @@ const useServerClock =
 : false
 
 document.addEventListener('focus', () => updateClock())
-document.addEventListener('visibilitychange', () => {if(document.visibilityState === 'visible'){updateClock()}})
+document.addEventListener('visibilitychange', () => {if(document.visibilityState === 'visible') updateClock()})
 document.addEventListener('resume', () => updateClock())
 //https://developer.chrome.com/docs/web-platform/page-lifecycle-api/image/page-lifecycle-api-state.svg
 
@@ -36,7 +36,7 @@ useServerClock === true
 clockProc()
 
 function updateClock() {
-    let timestamp = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
+    let timestamp = new Date(new Date().toLocaleString(localeLanguageRegion, {timeZone:localeJurisdiction}))
     clock = new Date(clock.getTime() + (timestamp.getTime() - localizedClientClock.getTime()))
     localizedClientClock = timestamp
 }
@@ -44,8 +44,8 @@ function updateClock() {
 function clockProc() {
     updateClock()
     if(document.getElementsByClassName('liveClockFull').length > 0)
-        {for(item of document.getElementsByClassName('liveClockFull')){item.innerHTML=clock}}
+        {for(item of document.getElementsByClassName('liveClockFull')){item.innerHTML = clock}}
     if(document.getElementsByClassName('liveClockYear').length > 0)
-        {for(item of document.getElementsByClassName('liveClockYear')){item.innerHTML=clock.getFullYear()}}
+        {for(item of document.getElementsByClassName('liveClockYear')){item.innerHTML = clock.getFullYear()}}
     setTimeout(() => clockProc(), tick)
 }
