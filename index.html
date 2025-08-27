@@ -31,7 +31,7 @@
 		textarea, button, input, optgroup, select {
 			font-family:inherit;
 			font-size:100%;
-			line-height: 1.15;
+			line-height:1.15;
 			margin:0
 		}
 		legend {padding:0}
@@ -44,7 +44,7 @@
 		[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {height:auto}
 		[type=search] {-webkit-appearance:textfield; outline-offset:-2px}
 		[type=search]::-webkit-search-decoration {-webkit-appearance:none}
-		::-webkit-file-upload-button {-webkit-appearance:button;font:inherit}
+		::-webkit-file-upload-button {-webkit-appearance:button; font:inherit}
 	</style>
 
 	<!--use the projection media type as a placeholder for sideloading assets-->
@@ -67,14 +67,14 @@
 	<script>
 		const localeLanguageRegion = "en-US"
 		const localeJurisdiction = "America/New_York"
-		console.log("Locale language region set to: "+localeLanguageRegion)
-		console.log("Locale jurisdiction set to: "+localeJurisdiction)
+		console.log("Locale language region set to: " + localeLanguageRegion)
+		console.log("Locale jurisdiction set to: " + localeJurisdiction)
 
 		const establishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
-		console.log("Network protocol set to: "+establishedNetworkProtocol)
+		console.log("Network protocol set to: " + establishedNetworkProtocol)
 
-		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion,{timeZone:localeJurisdiction}))
-		console.log("Localized clock initialized to: "+localizedClientClock)
+		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion, {timeZone:localeJurisdiction}))
+		console.log("Localized clock initialized to: " + localizedClientClock)
 
 		let result = null
 		const xhr = new XMLHttpRequest()
