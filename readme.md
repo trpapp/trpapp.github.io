@@ -22,7 +22,7 @@
 - **Functions**: camelCase (openDatabase, runExample)
 - **Variables**: snake_case (target_customer_id)
 - **Example**:
-```
+```javascript
 // code/main_app.js
 
 // constant variables use PascalCase
@@ -94,7 +94,7 @@ runExample();
 - **Functions**: camelCase (getProperCase)
 - **Variables/Aliases**: snake_case (order_id, order_month, cte_mod)
 - **Example**:
-```
+```sql
 create view Dbo.VwOrder as
 with cte as (
 	select
