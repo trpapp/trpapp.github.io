@@ -11,15 +11,14 @@ fetch('https://free.freeipapi.com/api/json/', {mode:'cors', method:'GET'}).then(
 const AcceptableDrift = 240000 //in milliseconds
 const Tick = 4000 //in milliseconds
 
-const ServerClockLocalized =
+const ServerTimestamp =
 !(http_headers === null)
-? new Date(new Date(http_headers.get('Date'))
-    .toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
+? new Date(http_headers.get('Date')).getTime()
 : null
 
 const UseServerClock =
-!(ServerClockLocalized === null)
-&& (LocalizedClientClock.getTime() - ServerClockLocalized.getTime()) > AcceptableDrift
+!(ServerTimestamp === null)
+&& (client_timestamp - ServerTimestamp) > AcceptableDrift
 ? true
 : false
 
@@ -30,15 +29,15 @@ document.addEventListener('resume', () => updateClock())
 
 const Clock =
 UseServerClock === true
-? new Date(ServerClockLocalized.getTime())
-: new Date(LocalizedClientClock.getTime())
+? new Date(ServerTimestamp)
+: new Date(client_timestamp)
 
 clockProc()
 
 function updateClock() {
-    let timestamp = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
-    Clock.setTime(Clock.getTime() + (timestamp.getTime() - LocalizedClientClock.getTime()))
-    LocalizedClientClock.setTime(timestamp.getTime())
+    let timestamp = Date.now()
+    Clock.setTime(Clock.getTime() + (timestamp - client_timestamp))
+    client_timestamp = timestamp
 }
 
 function clockProc() {
