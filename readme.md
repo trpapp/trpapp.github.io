@@ -23,21 +23,21 @@
 - **Variables**: snake_case (target_customer_id)  
 **Example**:
 ```javascript
-// code/main_app.js
+//code/main_app.js
 
-// constant variables use PascalCase
+//constant variables use PascalCase
 const SQLite = require('sqlite');
 const SQLite3 = require('sqlite3');
 
 const DbFile = './data/my_database_file.db';
 
-// classes use PascalCase
+//classes use PascalCase
 class CustomerService {
   constructor() {
     this.db = null;
   }
 
-  // functions use camelCase
+  //functions use camelCase
   async openDatabase() {
     this.db = await SQLite.open({
       filename: DbFile,
@@ -45,37 +45,37 @@ class CustomerService {
     });
   }
 
-  // functions use camelCase
+  //functions use camelCase
   async getCustomerOrders(customer_id) {
-    // non-constant variables use snake_case
+    //non-constant variables use snake_case
     let sql_query = ` --see data system conventions
       select Order_Id, Order_Date, Total_Amount
       from MyStore.Order
       where Customer_Id = ?
     `;
 
-    // non-constant variables use snake_case
+    //non-constant variables use snake_case
     let customer_orders = await this.db.all(sql_query, customer_id);
 
     customer_orders.forEach(order => {
-      // non-constant variables within a loop use snake_case
-      let { Order_Id, Order_Date, Total_Amount } = order;
+      //non-constant variables within a loop use snake_case
+      let {Order_Id, Order_Date, Total_Amount} = order;
       console.log(`Order ID: ${Order_Id}, Date: ${Order_Date}, Total: ${Total_Amount}`);
     });
   }
 
-  // functions use camelCase
+  //functions use camelCase
   async closeDatabase() {
     await this.db.close();
   }
 }
 
-// usage example
+//usage example
 async function runExample() {
   let customer_service = new CustomerService();
   await customer_service.openDatabase();
 
-  // non-constant variables use snake_case
+  //non-constant variables use snake_case
   let target_customer_id = 1;
 
   await customer_service.getCustomerOrders(target_customer_id);
