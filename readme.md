@@ -91,7 +91,7 @@ runExample();
 - **Views**: PascalCase (VwOrder)
 - **Columns**: Pascal_Snake_Case (Customer_Id, First_Name)
 - **Stored Procedures**: PascalCase (SpOrder)
-- **Functions**: camelCase (getProperCase)
+- **Functions**: camelCase (getProperCase, fnCalculateLevenshteinDistance)
 - **Variables/Aliases**: snake_case (order_id, order_month, cte_mod)  
 **Example**:
 ```sql
