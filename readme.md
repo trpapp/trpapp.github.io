@@ -1,7 +1,7 @@
 ### Directory System Conventions
 - **Folders**: kebab-case (my-project, code, data, docs, test)
 - **Files**: snake_case (main_app.js, my_database_file.db, notes.md)
-  **Example**:
+   **Example**:
 ```
 /my-project
 ├── /code
@@ -21,7 +21,7 @@
 - **Interfaces/Classes**: PascalCase (CustomerService)
 - **Functions**: camelCase (openDatabase, runExample)
 - **Variables**: snake_case (target_customer_id)
-  **Example**:
+   **Example**:
 ```javascript
 // code/main_app.js
 
@@ -93,7 +93,7 @@ runExample();
 - **Stored Procedures**: PascalCase (SpOrder)
 - **Functions**: camelCase (getProperCase)
 - **Variables/Aliases**: snake_case (order_id, order_month, cte_mod)
-  **Example**:
+   **Example**:
 ```sql
 create view Dbo.VwOrder as
 with cte as (
