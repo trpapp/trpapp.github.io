@@ -73,7 +73,8 @@
 		const EstablishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
 		console.log("Network protocol set to: " + EstablishedNetworkProtocol)
 
-		const LocalizedClientClock = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
+		let client_timestamp = Date.now()
+		const ClientLocalizedClock = new Intl.DateTimeFormat(LocaleLanguageRegion, {timeZone:LocaleJurisdiction, dateStyle:"short", timeStyle:"full"}).format(client_timestamp)
 		console.log("Localized clock set to: " + LocalizedClientClock)
 
 		let result = null
