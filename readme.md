@@ -113,10 +113,10 @@ with cte as (
 )
 ,cte_mod as (
 	select
-		order_id,
-		order_date,
-		datePart(Month, order_date) as order_month,
-		total_amount
+		order_id
+		,order_date
+		,datePart(Month, order_date) as order_month
+		,total_amount
 	from
 		cte
 ) select * from cte_mod
