@@ -1,4 +1,4 @@
-let httpHeaders = null
+let http_headers = null
 if(!(result === null)) console.log("result IS NOT NULL!")
 
 /*swap in all link tag resources marked for projection*/
@@ -8,18 +8,18 @@ document.addEventListener("DOMContentLoaded", function() {document.querySelector
 fetch('https://free.freeipapi.com/api/json/', {mode:'cors', method:'GET'}).then(response => response.json()).then(result => console.log(result))
 
 /*clock processing script*/
-const acceptableDrift = 240000 //in milliseconds
-const tick = 4000 //in milliseconds
+const AcceptableDrift = 240000 //in milliseconds
+const Tick = 4000 //in milliseconds
 
-const serverClockLocalized =
-!(httpHeaders === null)
-? new Date(new Date(httpHeaders.get('Date'))
-    .toLocaleString(localeLanguageRegion, {timeZone:localeJurisdiction}))
+const ServerClockLocalized =
+!(http_headers === null)
+? new date(new date(http_headers.get('Date'))
+    .toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
 : null
 
-const useServerClock =
-!(serverClockLocalized === null)
-&& (localizedClientClock.getTime() - serverClockLocalized.getTime()) > acceptableDrift
+const UseServerClock =
+!(ServerClockLocalized === null)
+&& (localized_client_clock.getTime() - ServerClockLocalized.getTime()) > AcceptableDrift
 ? true
 : false
 
@@ -29,23 +29,23 @@ document.addEventListener('resume', () => updateClock())
 //https://developer.chrome.com/docs/web-platform/page-lifecycle-api/image/page-lifecycle-api-state.svg
 
 let clock =
-useServerClock === true
-? new Date(serverClockLocalized.getTime())
-: new Date(localizedClientClock.getTime())
+UseServerClock === true
+? new date(ServerClockLocalized.getTime())
+: new Date(localized_client_clock.getTime())
 
 clockProc()
 
 function updateClock() {
-    let timestamp = new Date(new Date().toLocaleString(localeLanguageRegion, {timeZone:localeJurisdiction}))
-    clock = new Date(clock.getTime() + (timestamp.getTime() - localizedClientClock.getTime()))
-    localizedClientClock = timestamp
+    let timestamp = new date(new date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
+    clock = new date(clock.getTime() + (timestamp.getTime() - localized_client_clock.getTime()))
+    localized_client_clock = timestamp
 }
 
 function clockProc() {
     updateClock()
-    if(document.getElementsByClassName('liveClockFull').length > 0)
-        {for(item of document.getElementsByClassName('liveClockFull')){item.innerHTML = clock}}
-    if(document.getElementsByClassName('liveClockYear').length > 0)
-        {for(item of document.getElementsByClassName('liveClockYear')){item.innerHTML = clock.getFullYear()}}
-    setTimeout(() => clockProc(), tick)
+    if(document.getElementsByClassName('LiveClockFull').length > 0)
+        {for(item of document.getElementsByClassName('LiveClockFull')){item.innerHTML = clock}}
+    if(document.getElementsByClassName('LiveClockYear').length > 0)
+        {for(item of document.getElementsByClassName('LiveClockYear')){item.innerHTML = clock.getFullYear()}}
+    setTimeout(() => clockProc(), Tick)
 }
