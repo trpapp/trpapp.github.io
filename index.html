@@ -75,7 +75,7 @@
 
 		let client_timestamp = Date.now()
 		const ClientLocalizedClock = new Intl.DateTimeFormat(LocaleLanguageRegion, {timeZone:LocaleJurisdiction, dateStyle:"short", timeStyle:"full"}).format(client_timestamp)
-		console.log("Localized clock set to: " + LocalizedClientClock)
+		console.log("Localized clock set to: " + ClientLocalizedClock)
 
 		let result = null
 		const Xhr = new XMLHttpRequest()
