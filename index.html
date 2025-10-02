@@ -65,16 +65,16 @@
 	/>
 
 	<script>
-		const localeLanguageRegion = "en-US"
-		const localeJurisdiction = "America/New_York"
-		console.log("Locale language region set to: " + localeLanguageRegion)
-		console.log("Locale jurisdiction set to: " + localeJurisdiction)
+		const LocaleLanguageRegion = "en-US"
+		const LocaleJurisdiction = "America/New_York"
+		console.log("Locale language region set to: " + LocaleLanguageRegion)
+		console.log("Locale jurisdiction set to: " + LocaleJurisdiction)
 
-		const establishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
+		const EstablishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
 		console.log("Network protocol set to: " + establishedNetworkProtocol)
 
-		let localizedClientClock = new Date(new Date().toLocaleString(localeLanguageRegion, {timeZone:localeJurisdiction}))
-		console.log("Localized clock initialized to: " + localizedClientClock)
+		let localized_client_clock = new date(new date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
+		console.log("Localized clock initialized to: " + localized_client_clock)
 
 		let result = null
 		const xhr = new XMLHttpRequest()
