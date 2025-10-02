@@ -73,11 +73,11 @@
 		const EstablishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
 		console.log("Network protocol set to: " + EstablishedNetworkProtocol)
 
-		let localized_client_clock = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
-		console.log("Localized clock initialized to: " + localized_client_clock)
+		const LocalizedClientClock = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
+		console.log("Localized clock set to: " + LocalizedClientClock)
 
 		let result = null
-		const xhr = new XMLHttpRequest()
+		const Xhr = new XMLHttpRequest()
 		function logResult(txt) {result = txt; console.log(txt)}
 		if(window.fetch) {
 			fetch('./', {mode:'cors', method:'HEAD'})
@@ -87,18 +87,18 @@
 			})
 			.catch(() => {
 				try {
-					xhr.open('HEAD', './', false)
-					xhr.onerror = () => {logResult("An xhr error occurred")}
-					xhr.send()
-					logResult("Http request method: Switched from Fetch to Xhr -\n" + xhr.getAllResponseHeaders())
+					Xhr.open('HEAD', './', false)
+					Xhr.onerror = () => {logResult("An Xhr error occurred")}
+					Xhr.send()
+					logResult("Http request method: Switched from Fetch to Xhr -\n" + Xhr.getAllResponseHeaders())
 				} catch {logResult(null)}
 			})
 		} else {
 			try {
-				xhr.open("HEAD", './', false)
-				xhr.onerror = () => {logResult("An xhr error occurred")}
-				xhr.send()
-				logResult("Http request method: Xhr -\n" + xhr.getAllResponseHeaders())
+				Xhr.open("HEAD", './', false)
+				Xhr.onerror = () => {logResult("An Xhr error occurred")}
+				Xhr.send()
+				logResult("Http request method: Xhr -\n" + Xhr.getAllResponseHeaders())
 			} catch {logResult(null)}
 		}
 	</script>
