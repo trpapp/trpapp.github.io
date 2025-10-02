@@ -1,6 +1,6 @@
 ### Directory System Conventions
 - **Folders**: kebab-case (my-project, code, data, docs, test)
-- **Files**: snake_case (main_app.js, my_database_file.db, project_notes.md)
+- **Files**: snake_case (main_app.js, my_database_file.db, notes.md)
 - **Example**:
 ```
 /my-project
@@ -11,7 +11,7 @@
 ├── /data
 │   └── my_database_file.db
 ├── /docs
-│   └── project_notes.md
+│   └── notes.md
 └── /test
     └── unit_tests.js
 ```
