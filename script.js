@@ -28,7 +28,7 @@ document.addEventListener('visibilitychange', () => {if(document.visibilityState
 document.addEventListener('resume', () => updateClock())
 //https://developer.chrome.com/docs/web-platform/page-lifecycle-api/image/page-lifecycle-api-state.svg
 
-let clock =
+const Clock =
 UseServerClock === true
 ? new Date(ServerClockLocalized.getTime())
 : new Date(LocalizedClientClock.getTime())
@@ -37,15 +37,15 @@ clockProc()
 
 function updateClock() {
     let timestamp = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
-    clock = new Date(clock.getTime() + (timestamp.getTime() - LocalizedClientClock.getTime()))
+    Clock.setTime(Clock.getTime() + (timestamp.getTime() - LocalizedClientClock.getTime()))
     LocalizedClientClock.setTime(timestamp.getTime())
 }
 
 function clockProc() {
     updateClock()
     if(document.getElementsByClassName('LiveClockFull').length > 0)
-        {for(item of document.getElementsByClassName('LiveClockFull')){item.innerHTML = clock}}
+        {for(item of document.getElementsByClassName('LiveClockFull')){item.innerHTML = Clock}}
     if(document.getElementsByClassName('LiveClockYear').length > 0)
-        {for(item of document.getElementsByClassName('LiveClockYear')){item.innerHTML = clock.getFullYear()}}
+        {for(item of document.getElementsByClassName('LiveClockYear')){item.innerHTML = Clock.getFullYear()}}
     setTimeout(() => clockProc(), Tick)
 }
