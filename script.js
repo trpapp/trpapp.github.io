@@ -35,9 +35,8 @@ UseServerClock === true
 clockProc()
 
 function updateClock() {
-    let timestamp = Date.now()
-    Clock.setTime(Clock.getTime() + (timestamp - client_timestamp))
-    client_timestamp = timestamp
+    Clock.setTime(Clock.getTime() + (Date.now() - client_timestamp))
+    client_timestamp = Date.now()
 }
 
 function clockProc() {
