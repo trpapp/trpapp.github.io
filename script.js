@@ -13,7 +13,7 @@ const Tick = 4000 //in milliseconds
 
 const ServerClockLocalized =
 !(http_headers === null)
-? new date(new date(http_headers.get('Date'))
+? new Date(new Date(http_headers.get('Date'))
     .toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
 : null
 
@@ -30,14 +30,14 @@ document.addEventListener('resume', () => updateClock())
 
 let clock =
 UseServerClock === true
-? new date(ServerClockLocalized.getTime())
+? new Date(ServerClockLocalized.getTime())
 : new Date(localized_client_clock.getTime())
 
 clockProc()
 
 function updateClock() {
-    let timestamp = new date(new date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
-    clock = new date(clock.getTime() + (timestamp.getTime() - localized_client_clock.getTime()))
+    let timestamp = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
+    clock = new Date(clock.getTime() + (timestamp.getTime() - localized_client_clock.getTime()))
     localized_client_clock = timestamp
 }
 
