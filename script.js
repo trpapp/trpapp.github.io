@@ -19,7 +19,7 @@ const ServerClockLocalized =
 
 const UseServerClock =
 !(ServerClockLocalized === null)
-&& (localized_client_clock.getTime() - ServerClockLocalized.getTime()) > AcceptableDrift
+&& (LocalizedClientClock.getTime() - ServerClockLocalized.getTime()) > AcceptableDrift
 ? true
 : false
 
@@ -31,14 +31,14 @@ document.addEventListener('resume', () => updateClock())
 let clock =
 UseServerClock === true
 ? new Date(ServerClockLocalized.getTime())
-: new Date(localized_client_clock.getTime())
+: new Date(LocalizedClientClock.getTime())
 
 clockProc()
 
 function updateClock() {
     let timestamp = new Date(new Date().toLocaleString(LocaleLanguageRegion, {timeZone:LocaleJurisdiction}))
-    clock = new Date(clock.getTime() + (timestamp.getTime() - localized_client_clock.getTime()))
-    localized_client_clock = timestamp
+    clock = new Date(clock.getTime() + (timestamp.getTime() - LocalizedClientClock.getTime()))
+    LocalizedClientClock.setTime(timestamp.getTime())
 }
 
 function clockProc() {
