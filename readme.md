@@ -58,9 +58,9 @@ class CustomerService {
     let customer_orders = await this.db.all(sql_query, customer_id);
 
     customer_orders.forEach(order => {
-      //non-constant variables within a loop use snake_case
-      let {Order_Id, Order_Date, Total_Amount} = order;
-      console.log(`Order ID: ${Order_Id}, Date: ${Order_Date}, Total: ${Total_Amount}`);
+      //non-constant variables (within a loop) use snake_case
+      let {order_id, order_date, total_amount} = order;
+      console.log(`Order ID: ${order_id}, Date: ${order_date}, Total: ${total_amount}`);
     });
   }
 
