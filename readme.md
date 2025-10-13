@@ -17,18 +17,18 @@
 ```
 
 ### Code System Conventions
-- **Constants**: PascalCase (DbFile)
-- **Interfaces/Classes**: PascalCase (CustomerService)
-- **Functions**: camelCase (openDatabase, runExample)
-- **Variables**: snake_case (target_customer_id)  
+- **Variables**: snake_case (target_customer_id)
+- **Functions**: camelCase (openDatabase)
+- **Constants/Enums/Classes**: PascalCase (DbFile)
+- **Interfaces/Structs/Types**: Pascal_Snake_Case (Item_Props)  
 **Example**:
 ```javascript
 //code/main_app.js
 
-//constant variables use PascalCase
 const SQLite = require('sqlite');
 const SQLite3 = require('sqlite3');
 
+//constant variables use PascalCase
 const DbFile = './data/my_database_file.db';
 
 //classes use PascalCase
@@ -50,7 +50,7 @@ class CustomerService {
     //non-constant variables use snake_case
     let sql_query = ` --see data system conventions
       select Order_Id, Order_Date, Total_Amount
-      from MyStore.Order
+      from MyStore.TblOrder
       where Customer_Id = ?
     `;
 
@@ -86,25 +86,22 @@ runExample();
 ```
 
 ### Data System Conventions
-- **Schema**: PascalCase (MyStore)
-- **Tables**: PascalCase (Customer, Order)
-- **Views**: PascalCase (VwOrder)
-- **Columns**: Pascal_Snake_Case (Customer_Id, First_Name)
-- **Stored Procedures**: PascalCase (SpOrder)
-- **Functions**: camelCase (getProperCase, fnCalculateLevenshteinDistance)
+- **Schemas/Tables/Views**: PascalCase (Dbo.MyStore, MyStore.TblOrder, MyStore.VwOrder)
+- **Columns**: Pascal_Snake_Case (Order_Id, Customer_Id, First_Name)
+- **Stored Procedures/Functions**: camelCase (spLoadOrders, getProperCase, fnCalculateOrder)
 - **Variables/Aliases**: snake_case (order_id, order_month, cte_mod)  
 **Example**:
 ```sql
-create view Dbo.VwOrder as
+create view Dbo.MyStore.VwOrder as
 with cte as (
 	select
 		o.Order_Id as order_id
 		,o.Order_Date as order_date
 		,iif(o.Total_Amount is null, 0, o.Total_Amount) as total_amount
 	from
-		MyStore.Order as o
+		MyStore.TblOrder as o
 		/*
-		--left join MyStore.Customer as c
+		--left join MyStore.TblCustomer as c
 			--on c.Customer_Id = o.Customer_Id
 		*/
 	where
@@ -119,5 +116,6 @@ with cte as (
 		,total_amount
 	from
 		cte
-) select * from cte_mod
+)
+select * from cte_mod
 ```
