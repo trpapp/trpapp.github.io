@@ -1,13 +1,13 @@
 let http_headers = null
 if(!(result === null)) console.log("result IS NOT NULL!")
 
-/*swap in all link tag resources marked for projection*/
+//swap in all link tag resources marked for projection
 document.addEventListener("DOMContentLoaded", function() {document.querySelectorAll('link[media=projection]').forEach(link => {link.media='all'})})
 
-/*get ip and tracking info*/
+//get ip and tracking info
 fetch('https://free.freeipapi.com/api/json/', {mode:'cors', method:'GET'}).then(response => response.json()).then(result => console.log(result))
 
-/*clock processing script*/
+//clock processing script
 const AcceptableDrift = 240000 //in milliseconds
 const Tick = 4000 //in milliseconds
 
@@ -22,10 +22,10 @@ const UseServerClock =
 ? true
 : false
 
+//see https://developer.chrome.com/docs/web-platform/page-lifecycle-api/image/page-lifecycle-api-state.svg
 document.addEventListener('focus', () => updateClock())
 document.addEventListener('visibilitychange', () => {if(document.visibilityState === 'visible') updateClock()})
 document.addEventListener('resume', () => updateClock())
-//https://developer.chrome.com/docs/web-platform/page-lifecycle-api/image/page-lifecycle-api-state.svg
 
 const Clock =
 UseServerClock === true
