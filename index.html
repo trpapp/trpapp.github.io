@@ -41,56 +41,60 @@ href="https://cdn.jsdelivr.net/gh/icons8/line-awesome/dist/line-awesome/css/line
 <link rel="stylesheet" media="projection"
 href="./style.css"
 />
-<script> /*main*/
-//set global constants and dynamic variables
-const localeLanguageRegion = "en-CA" //"en-US"
-const localeJurisdiction = "America/New_York"
-const establishedNetworkProtocol = performance.getEntries()[0].nextHopProtocol //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3
 
-const localizedClientFormatter = new Intl.DateTimeFormat(localeLanguageRegion,{
+<script> /*main*/
+const siteLanguageRegion = "en-CA" //"en-US"
+const siteJurisdiction = "America/New_York"
+const siteProtocol = performance.getEntries()[0].nextHopProtocol || 'none' //ie- http/0.9, http/1.0, http/1.1, h2, h2c, h3..
+
+const siteDateTimeFormatter = new Intl.DateTimeFormat(siteLanguageRegion,{
 year:"numeric",month:"2-digit",day:"2-digit",weekday:"long"
 ,hour:"2-digit",minute:"2-digit",second:"2-digit",fractionalSecondDigits:3,hour12:false
-,timeZone:localeJurisdiction,timeZoneName:"short"
+,timeZone:siteJurisdiction,timeZoneName:"short"
 });
-let localizedClientStamp = Date.now()
-const localizedClientClock = new Date(localizedClientStamp)
-const localizedClientTick = 1000 //in milliseconds
-//const localizedClientAcceptableDrift = 4000 //in milliseconds
+let siteDateTimeStamp = Date.now()
+const siteClock = new Date(siteDateTimeStamp)
+const siteTick = 2000 //in milliseconds
+//const localizedClientAcceptableDrift = 16000 //in milliseconds
 //const ServerTimeStamp = !(http_headers === null) ? new Date(http_headers.get('Date')).getTime() : null
 //const UseServerClock = !(ServerTimestamp === null) && (client_timestamp - ServerTimestamp) > localizedClientAcceptableDrift ? true : false
 //const Clock = UseServerClock === true ? new Date(ServerTimestamp) : new Date(client_timestamp)
+//const heartbeat = !serverTimestamp && (Math.abs((siteTimestamp - serverTimestamp)) < acceptableDrift) ? new Date(serverTimestamp) : new Date(siteTimestamp)
 
 function renewClockAndStamp(){
-	localizedClientClock.setTime(localizedClientClock.getTime() + (Date.now() - localizedClientStamp))
-	localizedClientStamp = Date.now()
+	siteClock.setTime(siteClock.getTime() + (Date.now() - siteDateTimeStamp))
+	siteDateTimeStamp = Date.now()
 }
 function heartbeat(){
 	renewClockAndStamp()
-	document.getElementById("clock").textContent = localizedClientFormatter.format(localizedClientClock).replace(/^([A-Za-z]+),\s*([\d-]+),\s*([\d:.]+)\s*(.+)$/,'$2 $1\n$3 $4')
-	setTimeout(() =>heartbeat(),localizedClientTick)
+	document.getElementById("clock").textContent = siteDateTimeFormatter.format(siteClock).replace(/^([A-Za-z]+),\s*([\d-]+),\s*([\d:.]+)\s*(.+)$/,'$2 $1\n$3 $4')
+	setTimeout(() =>heartbeat(),siteTick)
 }
 
-let siteResponseStatus = null
-let siteResponseHeaders = null
-;(async () =>{try{const res = await fetch('./',{mode:'cors',method:'HEAD'});siteResponseStatus = res.status;siteResponseHeaders = Object.fromEntries(res.headers.entries())}
-catch{siteResponseStatus = 0;siteResponseHeaders = 0}}
-)()
-
-let freeIpApiResponseData = null
-;(async () =>{try{const res = await fetch('https://free.freeipapi.com/api/json/',{mode:'cors',method:'GET'});freeIpApiResponseData = await res.json()}
-catch{freeIpApiResponseData = 0}}
-)()
+let siteStatus = null
+let siteHeaders = null
+let freeIpApiData = null
 
 function loadChecker(){
-	if (siteResponseStatus === null || siteResponseHeaders === null || freeIpApiResponseData === null){setTimeout(loadChecker,localizedClientTick)}
-	else if (siteResponseStatus === 0 && siteResponseHeaders === 0 && freeIpApiResponseData === 0){console.log("stop load checker - network failure")}
-	else{console.log(siteResponseStatus);console.log(siteResponseHeaders);console.log(freeIpApiResponseData)}
-} loadChecker()
+	if (siteStatus === null || siteHeaders === null || freeIpApiData === null){setTimeout(loadChecker,siteTick)}
+	else if (siteStatus === 0 && siteHeaders === 0 && freeIpApiData === 0){console.log("offline.. retrying (every " + siteTick/1000 + " seconds)");setTimeout(loadChecker,siteTick)}
+	else{console.log(siteStatus);console.log(siteHeaders);console.log(freeIpApiData)}
+}
 
-console.log("Locale language region set to: " + localeLanguageRegion
-+ "\nLocale jurisdiction set to: " + localeJurisdiction
-+ "\nNetwork protocol set to: " + establishedNetworkProtocol
-+ "\nLocalized clock initialized to: " + localizedClientClock
+if (window.fetch){
+	;(async () =>{try{const res = await fetch('./',{mode:'cors',method:'HEAD'});siteStatus = res.status;siteHeaders = Object.fromEntries(res.headers.entries())}
+	catch{siteStatus = 0;siteHeaders = 0}}
+	)()
+	;(async () =>{try{const res = await fetch('https://free.freeipapi.com/api/json/',{mode:'cors',method:'GET'});freeIpApiData = await res.json()}
+	catch{freeIpApiData = 0}}
+	)()
+	loadChecker()
+}else{console.log("Fetch is not available")}
+
+console.log("Locale language region set to: " + siteLanguageRegion
++ "\nLocale jurisdiction set to: " + siteJurisdiction
++ "\nNetwork protocol set to: " + siteProtocol
++ "\nLocalized clock initialized to: " + siteClock
 )
 
 //sideload all link tags with the projection media type and tie in any functionality need after document onload
